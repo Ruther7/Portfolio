@@ -1,4 +1,8 @@
+import { useState } from 'react'
+
 function About() {
+  const [imageError, setImageError] = useState(false)
+
   return (
     <div className="min-h-[calc(100vh-4rem)] bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20">
@@ -29,18 +33,18 @@ function About() {
         
           <div className="flex justify-center mt-8 md:mt-0">
           <div className="bg-white rounded-lg shadow-lg p-6 sm:p-8 border border-gray-200">
-            <img 
-              src="/mypic.jpg" 
-              alt="Ruther Lee Laspina"
-              className="w-48 h-48 sm:w-56 sm:h-56 rounded-lg object-cover mx-auto shadow-md"
-              onError={(e) => {
-                e.target.style.display = 'none'
-                e.target.nextSibling.style.display = 'flex'
-              }}
-            />
-            <div className="w-48 h-48 sm:w-56 sm:h-56 bg-gradient-to-br from-pink-200 to-purple-200 rounded-lg mx-auto flex items-center justify-center text-5xl sm:text-6xl hidden">
-              👨‍🎓
-            </div>
+            {!imageError ? (
+              <img 
+                src="/mypic.jpg" 
+                alt="Ruther Lee Laspina"
+                className="w-48 h-48 sm:w-56 sm:h-56 rounded-lg object-cover mx-auto shadow-md"
+                onError={() => setImageError(true)}
+              />
+            ) : (
+              <div className="w-48 h-48 sm:w-56 sm:h-56 bg-gradient-to-br from-pink-200 to-purple-200 rounded-lg mx-auto flex items-center justify-center text-5xl sm:text-6xl">
+                👨‍🎓
+              </div>
+            )}
           </div>
           </div>
         </div>
